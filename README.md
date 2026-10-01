@@ -1,11 +1,11 @@
-# Título Proyecto
+# FilmUS
 
-## Miembros del grupo LX-XXX-X (sustituir)
+## Miembros del grupo L1-DF/AM-6
 
-1. Apellidos, Nombre
-1. Apellidos, Nombre
-1. Apellidos, Nombre
-1. Apellidos, Nombre
+1. Sánchez Limón, Jose
+2. Enrique Rosado, Jaime
+3. Rafael Trampler Alejo, Mateo
+4. Almeida Reyes, Joel
 
 ## 1. Introducción al problema
 
