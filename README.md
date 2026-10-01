@@ -11,9 +11,19 @@
 
 - Descripción del problema para poner en contexto el proyecto, incluyendo información sobre los clientes y usuarios, la situación actual, problemas, expectativas, etc. Se valorará la presencia de información multimedia (fotos, gráficos, documentos escaneados, etc.).
 
+Queremos crear una aplicación que permita a las personas poder guardar sus descubrimientos sobre el cine en una red social, donde puedan compartir con otros usuarios sus gustos y recomendaciones. Cada cliente tendrá una cuenta pública que otros clientes puedan consultar.
+
+Entre los tipos de usuarios, destacan los clientes y administradores.
+
+Podríamos encontrarnos con problemas como, películas con un estreno reciente o incluso películas poco reconocidas no se encuentren disponibles en la base de datos, también hay problemas como gestionar nombres o comentarios inapropiados de los clientes (la función principal de los administradores). Esperamos conseguir una aplicación que tenga una experiencia de usuario satisfactoria, convertir el cine en un ambiente sano y respetuoso, además de que la gente pueda descubrir películas nuevas que merece la pena que sean vistas.
+
 ## 2. Glosario de términos
 
-- Términos específicos del dominio del problema, ordenados alfabéticamente. Se valorará la presencia de información multimedia.
+-Log: Es el registro del cliente que indica que ha visto una película en concreto, con una valoración y reseña opcionales.
+-Rewatch: Cuando se registra que el cliente ha visto una misma película más de una vez.
+-Watchlist: Lista de películas que el cliente tiene pendiente por ver.
+-Tags: Etiqueta que se puede atribuir a una película y que la engloba con otras, por ejemplo: terror, drama, ciencia ficción...
+-Like: Valoración positiva que hace un cliente sobre el log de otro cliente.
 
 ## 3. Visión general del sistema
 
