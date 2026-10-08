@@ -11,19 +11,22 @@
 
 - Descripción del problema para poner en contexto el proyecto, incluyendo información sobre los clientes y usuarios, la situación actual, problemas, expectativas, etc. Se valorará la presencia de información multimedia (fotos, gráficos, documentos escaneados, etc.).
 
-Queremos crear una aplicación que permita a las personas poder guardar sus descubrimientos sobre el cine en una red social, donde puedan compartir con otros usuarios sus gustos y recomendaciones. Cada cliente tendrá una cuenta pública que otros clientes puedan consultar.
+Queremos crear una aplicación que permita a las personas poder guardar sus descubrimientos sobre el cine en una red social, donde puedan compartir con otros usuarios sus gustos y recomendaciones. Cada cliente tendrá una cuenta que podrá ser pública o privada.
 
 Entre los tipos de usuarios, destacan los clientes y administradores.
 
-Podríamos encontrarnos con problemas como, películas con un estreno reciente o incluso películas poco reconocidas no se encuentren disponibles en la base de datos, también hay problemas como gestionar nombres o comentarios inapropiados de los clientes (la función principal de los administradores). Esperamos conseguir una aplicación que tenga una experiencia de usuario satisfactoria, convertir el cine en un ambiente sano y respetuoso, además de que la gente pueda descubrir películas nuevas que merece la pena que sean vistas.
+Podríamos encontrarnos con problemas como que las películas de estreno reciente o poco reconocidas no se encuentren disponibles en la base de datos. También puede haber problemas con nombres o comentarios inapropiados de los clientes, que serán gestionados por los administradores. Esperamos conseguir una aplicación con una experiencia de usuario satisfactoria, crear un ambiente sano y respetuoso y ayudar a la gente a descubrir películas nuevas.
 
 ## 2. Glosario de términos
 
--Log: Es el registro del cliente que indica que ha visto una película en concreto, con una valoración y comentario opcionales.
--Rewatch: Cuando se registra que el cliente ha visto una misma película más de una vez.
--Watchlist: Lista de películas que el cliente tiene pendiente por ver.
--Tags: Etiqueta que se puede atribuir a una película y que la engloba con otras, por ejemplo: terror, drama, ciencia ficción...
--Like: Valoración positiva que hace un cliente sobre el log de otro cliente o sobre una película.
+- Comentario: Texto que escribe un cliente para dar su opinión sobre una película.
+- Like: Valoración positiva que hace un cliente sobre el log de otro cliente o sobre una película.
+- Lista: Grupo de películas creado por un cliente.
+- Log: Es el registro del cliente que indica que ha visto una película en concreto, con una valoración y comentario opcionales.
+- Rewatch: Cuando se registra que el cliente ha visto una misma película más de una vez.
+- Tags: Etiqueta que se puede atribuir a una película y que la engloba con otras, por ejemplo: terror, drama, ciencia ficción.
+- Valoración: Puntuación que un cliente da a una película.
+- Watchlist: Lista de películas que el cliente tiene pendiente por ver.
 
 ## 3. Visión general del sistema
 
@@ -85,16 +88,25 @@ Como cliente quiero que en mi perfil se puedan ver mis 4 películas favoritas pa
 
 #### 4.1.1. Requisitos de información
 
-##### R.I.01. Título requisito de información
+##### R.I.01. Información de las películas
 
-Como [tipo de usuario]
-quiero [servicio]
-para [razón]
+Como cliente quiero conocer el título, fecha de estreno, duración y sinopsis de las películas.
 
-**Prueba de aceptación**
-- Descripción de la primera comprobación a realizar
-- Descripción de la segunda comprobación a realizar
-- ...
+##### R.I.02. Información de los clientes
+
+Como administrador quiero guardar el nombre de usuario, correo electrónico, contraseña y privacidad del perfil de cada cliente.
+
+##### R.I.03. Información de los logs
+
+Como cliente quiero que cada log guarde la película, la fecha y hora, la valoración y el comentario opcional.
+
+##### R.I.04. Información de las listas
+
+Como cliente quiero guardar el nombre, descripción, privacidad y películas de cada una de mis listas.
+
+##### R.I.05. Información de los profesionales
+
+Como cliente quiero conocer el nombre, nacionalidad, fecha de nacimiento y profesión de los profesionales, además de su participación en cada película.
 
 #### 4.1.2. Reglas de negocio
 
@@ -172,4 +184,3 @@ Se consideran todo tipo de constraints declarativas (aquellas definidas durante 
 -- fin entregable 3 --
 
 ## Referencias
-
