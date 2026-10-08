@@ -19,7 +19,7 @@ Podríamos encontrarnos con problemas como, películas con un estreno reciente o
 
 ## 2. Glosario de términos
 
--Log: Es el registro del cliente que indica que ha visto una película en concreto, con una valoración y reseña opcionales.
+-Log: Es el registro del cliente que indica que ha visto una película en concreto, con una valoración y comentario opcionales.
 -Rewatch: Cuando se registra que el cliente ha visto una misma película más de una vez.
 -Watchlist: Lista de películas que el cliente tiene pendiente por ver.
 -Tags: Etiqueta que se puede atribuir a una película y que la engloba con otras, por ejemplo: terror, drama, ciencia ficción...
@@ -29,11 +29,34 @@ Podríamos encontrarnos con problemas como, películas con un estreno reciente o
 
 ### 3.1. Requisitos generales
 
+#### R.G.01. Registrar películas vistas
+
+Como cliente quiero guardar las películas que he visto, valorarlas y escribir comentarios para tener un registro de mi actividad.
+
+#### R.G.02. Gestionar listas
+
+Como cliente quiero crear listas de películas y tener una watchlist para organizar las películas que he visto o que quiero ver.
+
+#### R.G.03. Consultar otros perfiles
+
+Como cliente quiero ver los perfiles públicos de otros clientes para conocer sus películas vistas, valoraciones y listas públicas.
+
+#### R.G.04. Consultar películas
+
+Como cliente quiero consultar la información de las películas para conocer su título, fecha, duración, sinopsis y profesionales.
+
+#### R.G.05. Moderar la plataforma
+
+Como administrador quiero controlar la actividad de los clientes y eliminar comentarios inapropiados para mantener un buen ambiente en la plataforma.
+
 
 
 
 
 ### 3.2. Usuarios del sistema
+
+- Cliente: Puede registrar películas vistas, valorar películas, escribir comentarios, crear listas y consultar perfiles públicos.
+- Administrador: Se encarga de controlar la actividad de los clientes y eliminar contenido inapropiado.
 
 ## 4. Catálogo de requisitos
 
@@ -149,5 +172,4 @@ Se consideran todo tipo de constraints declarativas (aquellas definidas durante 
 -- fin entregable 3 --
 
 ## Referencias
-
 
