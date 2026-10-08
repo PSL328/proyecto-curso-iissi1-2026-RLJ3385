@@ -23,11 +23,15 @@ Podríamos encontrarnos con problemas como, películas con un estreno reciente o
 -Rewatch: Cuando se registra que el cliente ha visto una misma película más de una vez.
 -Watchlist: Lista de películas que el cliente tiene pendiente por ver.
 -Tags: Etiqueta que se puede atribuir a una película y que la engloba con otras, por ejemplo: terror, drama, ciencia ficción...
--Like: Valoración positiva que hace un cliente sobre el log de otro cliente.
+-Like: Valoración positiva que hace un cliente sobre el log de otro cliente o sobre una película.
 
 ## 3. Visión general del sistema
 
 ### 3.1. Requisitos generales
+
+
+
+
 
 ### 3.2. Usuarios del sistema
 
@@ -40,6 +44,15 @@ Podríamos encontrarnos con problemas como, películas con un estreno reciente o
 Como [tipo de usuario]
 quiero [servicio]
 para [razón]
+
+
+Como cliente quiero poder poner nota a películas para poder organizar mis películas según me hayan gustado más o menos
+
+Como administrador quiero que se pueda ver la fecha y hora de los logs que hacen los clientes para poder diferenciarlos más facilmente
+
+Como cliente quiero que en mi perfil se puedan ver mis 4 películas favoritas para poder compartirlo con otras personas
+
+
 
 **Prueba de aceptación**
 - Descripción de la primera comprobación a realizar
