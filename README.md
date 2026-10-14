@@ -120,6 +120,22 @@ Como administrador
 quiero que no haya dos clientes con el mismo nombre de usuario o el mismo correo electrónico
 para poder identificar a cada cliente sin confusión.
 
+##### R.N.03. Máximo de películas favoritas
+Como cliente
+quiero que mi perfil tenga como máximo 4 películas favoritas
+para que mi perfil sea claro y fácil de ver.
+
+##### R.N.04. Log solo de películas estrenadas
+Como cliente
+quiero que no se pueda registrar un log de una película que todavía no se ha estrenado
+para que los registros sean reales.
+
+##### R.N.05. Fecha del log no futura
+Como administrador
+quiero que la fecha y hora de un log no sea posterior al momento actual
+para que los registros sean correctos.
+
+
 
 ### 4.2. Mapa de historias de usuario (opcional)
 
