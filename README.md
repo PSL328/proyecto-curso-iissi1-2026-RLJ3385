@@ -135,7 +135,25 @@ Como administrador
 quiero que la fecha y hora de un log no sea posterior al momento actual
 para que los registros sean correctos.
 
+##### R.N.06. Películas no repetidas en una lista
+Como cliente
+quiero que una película no pueda aparecer dos veces en la misma lista o en la watchlist
+para tener mis listas ordenadas.
 
+##### R.N.07. Likes válidos
+Como cliente
+quiero que no se pueda dar like a un log propio, y que solo se pueda dar un like por log
+para que los likes reflejen la opinión real de otros clientes.
+
+##### R.N.08. Privacidad de listas y perfiles
+Como cliente
+quiero que mis listas privadas y mi perfil privado solo los pueda ver yo
+para proteger mi información.
+
+##### R.N.09. Duración de la película
+Como administrador
+quiero que la duración de una película sea mayor que 0 minutos
+para que la información de las películas sea correcta.
 
 ### 4.2. Mapa de historias de usuario (opcional)
 
