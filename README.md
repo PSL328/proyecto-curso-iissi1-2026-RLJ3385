@@ -110,9 +110,16 @@ Como cliente quiero conocer el nombre, nacionalidad, fecha de nacimiento y profe
 
 #### 4.1.2. Reglas de negocio
 
-##### R.N.01. Título regla negocio
+##### R.N.01. Rango de valoración
+Como cliente
+quiero que la valoración de una película esté entre 0,5 y 5 estrellas, en pasos de 0,5
+para que todas las notas sigan la misma escala.
 
-Descripción de la regla de negocio.
+##### R.N.02. Datos únicos del cliente
+Como administrador
+quiero que no haya dos clientes con el mismo nombre de usuario o el mismo correo electrónico
+para poder identificar a cada cliente sin confusión.
+
 
 ### 4.2. Mapa de historias de usuario (opcional)
 
