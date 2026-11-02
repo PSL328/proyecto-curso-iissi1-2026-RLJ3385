@@ -400,7 +400,7 @@ para que nadie pueda leerla aunque acceda a la base de datos.
 
 ### 5.1. Diagramas de clases UML
 
-- con restricciones.
+![Modelo conceptual de FilmUS](modelo_conceptual.svg)
 
 ### 5.2. Escenarios de prueba
 
