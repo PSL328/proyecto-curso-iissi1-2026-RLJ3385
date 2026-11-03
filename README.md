@@ -592,7 +592,7 @@ R.N.09. Política de visibilidad y acceso a datos privados
 
     Como cliente
 
-    quiero que las listas personalizadas marcadas como privadas y la información de los perfiles privados solo sean accesibles por su usuario propietario
+    quiero que las listas personalizadas marcadas como privadas y la información que contienen solo sean accesibles por su usuario propietario
 
     para garantizar el control de privacidad de la información.
 
@@ -624,11 +624,21 @@ R.N.11. Autoridad exclusiva de moderación de comentarios
 
 ### 5.1. Diagramas de clases UML
 
-![Modelo conceptual de FilmUS](modelo_conceptual.svg)
+
+![Diagrama UML](diagramas\diagrama_uml.svg)
+
+<!-- ![Modelo conceptual de FilmUS](modelo_conceptual.svg) -->
+
+
+
 
 ### 5.2. Escenarios de prueba
 
 - con descripción textual y diagrama de objetos UML.
+
+![Escenario de prueba 1](diagramas\escenario_prueba1.svg)
+![Escenario de prueba 2](diagramas\escenario_prueba2.svg)
+![Escenario de prueba 3](diagramas\escenario_prueba3.svg)
 
 ## 6. Matrices de trazabilidad
 
