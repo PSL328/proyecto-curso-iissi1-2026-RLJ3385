@@ -9,390 +9,614 @@
 
 ## 1. Introducción al problema
 
-Queremos crear una aplicación que permita a las personas poder guardar sus descubrimientos sobre el cine en una red social, donde puedan compartir con otros usuarios sus gustos y recomendaciones. Cada cliente tendrá una cuenta que podrá ser pública o privada.
+Hoy en día consumimos muchísimo cine gracias a la gran variedad de plataformas de streaming existentes, pero no tenemos una forma sencilla y centralizada de organizar lo que vemos. La mayoría de los aficionados al cine terminan apuntando películas en notas del móvil, listas sueltas o confiando en la memoria, lo que hace que se olviden valoraciones, recomendaciones o títulos que querían ver. Además, las redes sociales convencionales no están pensadas para cine: los comentarios se pierden entre otro contenido, los spoilers están a la orden del día y resulta difícil explorar el trabajo de los actores y directores tras cada película.
 
-Entre los tipos de usuarios, destacan los clientes y administradores.
-
-Podríamos encontrarnos con problemas como que las películas de estreno reciente o poco reconocidas no se encuentren disponibles en la base de datos. También puede haber problemas con nombres o comentarios inapropiados de los clientes, que serán gestionados por los administradores. Esperamos conseguir una aplicación con una experiencia de usuario satisfactoria, crear un ambiente sano y respetuoso y ayudar a la gente a descubrir películas nuevas.
+Para resolver esto creamos FilmUS, una plataforma web pensada por y para amantes del cine. El sistema cuenta con dos tipos de usuarios: los clientes, que pueden registrar sus visualizaciones, valorar películas, escribir reseñas, organizar listas y seguir a otros usuarios respetando la privacidad de su perfil; y los administradores, encargados de gestionar el catálogo y moderar comportamientos o comentarios inapropiados para mantener un entorno sano. Con este proyecto esperamos ofrecer una herramienta intuitiva que centralice toda esta experiencia y ayude a la comunidad cinéfila a descubrir y compartir contenido de forma cómoda y organizada.
 
 ## 2. Glosario de términos
 
-- **Comentario**: Texto opcional que escribe un cliente dentro de un log para dar su opinión sobre una película.
 - **Favoritas**: Películas (como máximo 4) que un cliente elige para destacar en su perfil.
 - **Like**: Valoración positiva que hace un cliente sobre el log de otro cliente o sobre una película.
-- **Lista**: Grupo de películas creado por un cliente.
 - **Log**: Es el registro del cliente que indica que ha visto una película en concreto, con una valoración y comentario opcionales.
 - **Perfil**: Página de un cliente donde se muestran sus logs, listas y películas favoritas. Puede ser público o privado.
 - **Profesional**: Persona que participa en una película (por ejemplo: director, actor, guionista).
 - **Rewatch**: Cuando se registra que el cliente ha visto una misma película más de una vez.
 - **Seguir**: Acción de un cliente para estar al tanto de la actividad de otro cliente con perfil público.
 - **Tags**: Etiqueta que se puede atribuir a una película y que la engloba con otras, por ejemplo: terror, drama, ciencia ficción.
-- **Valoración**: Puntuación que un cliente da a una película, entre 0,5 y 5 estrellas.
 - **Watchlist**: Lista especial de películas que el cliente tiene pendiente por ver. Cada cliente tiene una.
 
 ## 3. Visión general del sistema
 
 ### 3.1. Requisitos generales
 
-#### **R.G.01. Registrar películas vistas**
-Como cliente
+R.G.01. Gestión de usuarios
 
-quiero guardar las películas que he visto, valorarlas y escribir comentarios
+    Como cliente o administrador
 
-para tener un registro de mi actividad.
+    quiero tener una cuenta con perfil propio
 
-#### **R.G.02. Gestionar listas**
-Como cliente
+    para poder identificarme en la aplicación, ver los perfiles de otros cinéfilos y elegir si quiero que mi perfil sea público o privado.
 
-quiero crear listas de películas y tener una watchlist
+R.G.02. Gestión de películas
 
-para organizar las películas que he visto o que quiero ver.
+    Como cliente o administrador
 
-#### **R.G.03. Consultar otros perfiles**
-Como cliente
+    quiero ver un catálogo con las películas disponibles y sus datos principales
 
-quiero ver los perfiles públicos de otros clientes
+    para buscar películas que me interesen, leer de qué van y descubrir títulos nuevos.
 
-para conocer sus películas vistas, valoraciones y listas públicas.
+R.G.03. Gestión de valoraciones (Logs y reseñas)
 
-#### **R.G.04. Consultar películas**
-Como cliente
+    Como cliente o administrador
 
-quiero consultar la información de las películas
+    quiero marcar las películas que he visto, ponerles nota y escribir opiniones
 
-para conocer su título, fecha, duración, sinopsis y profesionales.
+    para llevar el control de todo lo que voy viendo y compartir mis críticas con la comunidad.
 
-#### **R.G.05. Moderar la plataforma**
-Como administrador
+R.G.04. Gestión de listas personalizadas
 
-quiero controlar la actividad de los clientes y eliminar comentarios inapropiados
+    Como cliente
 
-para mantener un buen ambiente en la plataforma.
+    quiero organizar películas en listas temáticas creadas por mí
+
+    para guardar selecciones personalizadas, enseñárselas a otros usuarios y ver las listas que hace la gente.
+
+R.G.05. Gestión de películas por ver (Watchlist)
+
+    Como cliente
+
+    quiero tener una lista especial de películas pendientes de ver
+
+    para ir apuntando las películas que me llaman la atención y no olvidarme de verlas en el futuro.
+
+R.G.06. Gestión de profesionales y su asignación a películas
+
+    Como cliente o administrador
+
+    quiero ver la información de actores y directores y en qué películas han trabajado
+
+    para conocer al equipo que hay detrás de cada película y buscar más obras de mis artistas favoritos.
+
+---
 
 ### 3.2. Usuarios del sistema
 
 - **Cliente**: Puede registrar películas vistas, valorar películas, escribir comentarios, dar likes, crear listas, seguir a otros clientes y consultar perfiles públicos.
-- **Administrador**: Se encarga de controlar la actividad de los clientes y eliminar contenido inapropiado.
+- **Administrador**: Se encarga de controlar la actividad de los clientes y eliminar contenido inapropiado o erróneo.
 
 ## 4. Catálogo de requisitos
 
 ### 4.1. Requisitos funcionales
 
-#### **R.F.01. Valorar películas**
-Como cliente
+#### 4.1.1. Módulo R.G.01: Gestión de usuarios
 
-quiero poder poner nota a las películas
+R.F.1.01. Registrar usuario (Create)
 
-para poder organizar mi historial según me hayan gustado más o menos.
+    Como cliente
 
-**- Pruebas de aceptación**
+    quiero crear una cuenta en la aplicación indicando mis datos de registro
 
-1- Comprobar que un cliente puede asignar una valoración en estrellas a una película dentro de su log.
-
-2- Verificar que el sistema rechaza cualquier valor fuera de la escala de 0,5 a 5 estrellas o que no vaya en pasos de 0,5 (por ejemplo: 0, 3,7 o 6).
-
-3- Comprobar que la valoración se guarda correctamente asociada al cliente y a la película.
-
-4- Se debe aplicar la regla de negocio R.N.01.
-
-#### **R.F.02. Consultar fecha y hora de los logs**
-Como administrador
-
-quiero que se pueda ver la fecha y hora de los logs que hacen los clientes
-
-para poder diferenciarlos más fácilmente y mantener un control cronológico.
+    para poder acceder a la plataforma y tener mi propio perfil personal.
 
 **- Pruebas de aceptación**
 
-1- Comprobar que al consultar cualquier log de un cliente se muestra de forma visible su fecha y hora exacta.
+1- Comprobar que un cliente se puede registrar proporcionando nombre de usuario, correo electrónico y contraseña.
 
-2- Verificar que el sistema asigna automáticamente la fecha y hora del servidor al registrar el log.
+2- Verificar que el sistema rechaza el registro si el nombre de usuario o el correo electrónico ya existen en la base de datos.
 
-3- Se debe aplicar la regla de negocio R.N.05.
+R.F.1.02. Consultar perfil de usuario (Read)
 
-#### **R.F.03. Registrar un rewatch**
-Como cliente
+    Como cliente o administrador
 
-quiero marcar una película como vista de nuevo (rewatch)
+    quiero consultar los datos de perfil de un usuario
 
-para llevar la cuenta de cuántas veces la he visualizado a lo largo del tiempo.
-
-**- Pruebas de aceptación**
-
-1- Comprobar que, al crear un nuevo log de una película que el cliente ya tenía registrada, el log queda marcado como rewatch.
-
-2- Verificar que el sistema muestra correctamente cuántas veces ha visto el cliente esa película.
-
-3- Se deben aplicar las reglas de negocio R.N.05 y R.N.10.
-
-#### **R.F.04. Dar y retirar likes**
-Como cliente
-
-quiero dar o retirar un like en los logs de otros clientes y en las películas
-
-para mostrar mi apoyo o acuerdo con sus valoraciones y reseñas, y destacar las películas que me gustan.
+    para conocer su información general, sus películas vistas y sus listas públicas.
 
 **- Pruebas de aceptación**
 
-1- Comprobar que un cliente puede dar like a un log publicado por otro cliente y que queda registrado correctamente.
+1- Comprobar que cualquier usuario puede consultar un perfil público y ver su información básica.
 
-2- Comprobar que un cliente puede dar like a una película.
+2- Verificar que si un perfil es privado, solo el propio dueño puede ver sus detalles completos.
 
-3- Verificar que el sistema impide que un cliente dé like a su propio log.
+R.F.1.03. Actualizar datos de usuario (Update)
 
-4- Comprobar que un cliente puede pulsar de nuevo sobre el botón de like para retirarlo.
+    Como cliente
 
-5- Verificar que no se permite registrar más de un like por el mismo cliente en un mismo log o en una misma película.
+    quiero modificar mis datos personales y la privacidad de mi cuenta
 
-6- Se debe aplicar la regla de negocio R.N.07.
-
-#### **R.F.05. Gestionar las películas favoritas del perfil**
-Como cliente
-
-quiero seleccionar y ordenar mis 4 películas favoritas en mi perfil
-
-para destacar aquellas obras que más me representan ante el resto de la comunidad.
+    para mantener mi información actualizada o cambiar el nivel de visibilidad de mi perfil.
 
 **- Pruebas de aceptación**
 
-1- Comprobar que el cliente puede añadir una película a su sección de favoritas en el perfil.
+1- Comprobar que un cliente puede actualizar su contraseña o cambiar su privacidad entre pública y privada.
 
-2- Verificar que el perfil contiene como máximo 4 películas favoritas, mostrando un mensaje de error si se intenta añadir una quinta.
+2- Verificar que si el cliente intenta modificar su nombre de usuario por uno ya existente, el sistema bloquea los cambios y muestra un error.
 
-3- Comprobar que cualquier otro cliente que consulte un perfil público puede ver dichas películas favoritas en el orden elegido.
+R.F.1.04. Dar de baja usuario (Delete)
 
-4- Se debe aplicar la regla de negocio R.N.03.
+    Como cliente o administrador
 
-#### **R.F.06. Seguir a otros clientes**
-Como cliente
+    quiero eliminar una cuenta de usuario del sistema
 
-quiero seguir los perfiles públicos de otros clientes
-
-para estar al tanto de su actividad, nuevas listas y reseñas recientes en mi sección de novedades.
+    para cancelar el acceso a la plataforma o retirar cuentas inapropiadas.
 
 **- Pruebas de aceptación**
 
-1- Comprobar que un cliente puede pulsar el botón "Seguir" en un perfil público.
+1- Comprobar que un cliente puede solicitar y confirmar la eliminación de su propia cuenta.
 
-2- Verificar que el sistema impide seguir a clientes con el perfil privado.
+2- Comprobar que un administrador puede dar de baja la cuenta de cualquier cliente en caso de infracción.
 
-3- Verificar que un cliente no puede seguirse a sí mismo.
+3- Verificar que tras eliminar la cuenta, no se puede volver a iniciar sesión con las mismas credenciales.
 
-4- Comprobar que se puede dejar de seguir a un cliente en cualquier momento y que la lista de seguidos/seguidores se actualiza al instante.
+---
 
-5- Se deben aplicar las reglas de negocio R.N.08 y R.N.11.
+#### 4.1.2. Módulo R.G.02: Gestión de películas
 
-#### **R.F.07. Gestionar listas y watchlist**
-Como cliente
+R.F.2.01. Crear película (Create)
 
-quiero crear, editar y borrar listas de películas, y añadir o quitar películas de mi watchlist
+    Como administrador
 
-para organizar las películas que he visto o que quiero ver.
+    quiero añadir una nueva película al catálogo general
 
-**- Pruebas de aceptación**
-
-1- Comprobar que un cliente puede crear una lista con nombre, descripción y privacidad.
-
-2- Comprobar que un cliente puede añadir y quitar películas de una lista y de su watchlist.
-
-3- Verificar que el sistema impide añadir dos veces la misma película a una lista o a la watchlist.
-
-4- Comprobar que se pueden añadir a la watchlist películas que todavía no se han estrenado.
-
-5- Se deben aplicar las reglas de negocio R.N.06 y R.N.08.
-
-#### **R.F.08. Eliminar comentarios inapropiados**
-Como administrador
-
-quiero eliminar los comentarios inapropiados de los clientes
-
-para mantener un ambiente sano y respetuoso en la plataforma.
+    para que los usuarios tengan disponible el título en la plataforma.
 
 **- Pruebas de aceptación**
 
-1- Comprobar que un administrador puede eliminar el comentario de cualquier log.
+1- Comprobar que un administrador puede dar de alta una película ingresando título, fecha de estreno, duración y sinopsis.
 
-2- Verificar que, al eliminar el comentario, el resto del log (película, fecha y valoración) se mantiene.
+2- Verificar que el sistema no permite dar de alta una película con una duración igual o inferior a 0 minutos.
 
-3- Verificar que un cliente no puede eliminar comentarios de otros clientes.
+R.F.2.02. Consultar película (Read)
 
-4- Se debe aplicar la regla de negocio R.N.12.
+    Como cliente o administrador
 
-#### 4.1.1. Requisitos de información
+    quiero consultar la ficha técnica y detalles de una película
 
-##### **R.I.01. Información de las películas**
-Como cliente
+    para conocer su sinopsis, duración, fecha de estreno y notas generales.
 
-quiero conocer el título, fecha de estreno, duración, sinopsis y tags de las películas
+**- Pruebas de aceptación**
 
-para decidir qué películas ver.
+1- Comprobar que un cliente puede buscar y abrir la ficha de cualquier película registrada.
 
-##### **R.I.02. Información de los clientes**
-Como administrador
+2- Verificar que el sistema muestra correctamente la información básica del título seleccionado.
 
-quiero guardar el nombre de usuario, correo electrónico, contraseña y privacidad del perfil (público o privado) de cada cliente
+R.F.2.03. Actualizar película (Update)
 
-para poder identificarlos y gestionar sus cuentas.
+    Como administrador
 
-##### **R.I.03. Información de los administradores**
-Como administrador
+    quiero modificar la información de una película existente
 
-quiero guardar el nombre de usuario, correo electrónico y contraseña de cada administrador
+    para corregir erratas o actualizar sinopsis y fechas de estreno.
 
-para poder identificarlos al acceder al sistema.
+**- Pruebas de aceptación**
 
-##### **R.I.04. Información de los logs**
-Como cliente
+1- Comprobar que un administrador puede editar cualquier campo de la ficha técnica de una película.
 
-quiero que cada log guarde el cliente, la película, la fecha y hora, la valoración opcional, el comentario opcional y si es un rewatch
+2- Verificar que el sistema guarda los cambios y los refleja inmediatamente en las búsquedas.
 
-para tener un registro completo de las películas que he visto.
+R.F.2.04. Eliminar película (Delete)
 
-##### **R.I.05. Información de las listas**
-Como cliente
+    Como administrador
 
-quiero guardar el nombre, descripción, privacidad y películas de cada una de mis listas
+    quiero borrar una película del catálogo
 
-para organizar mis películas.
+    para retirar entradas duplicadas o erróneas.
 
-##### **R.I.06. Información de la watchlist**
-Como cliente
+**- Pruebas de aceptación**
 
-quiero guardar las películas que tengo pendientes de ver y la fecha en que las añadí
+1- Comprobar que un administrador puede eliminar una película del sistema.
 
-para recordar qué películas quiero ver.
+2- Verificar que la película eliminada deja de aparecer en las búsquedas del catálogo general.
 
-##### **R.I.07. Información de los profesionales**
-Como cliente
+---
 
-quiero conocer el nombre, nacionalidad y fecha de nacimiento de los profesionales, además de su papel (director, actor, guionista...) en cada película en la que participan
+#### 4.1.3. Módulo R.G.03: Gestión de valoraciones (Logs y reseñas)
 
-para conocer quién ha hecho cada película.
+R.F.3.01. Crear valoración (Create)
 
-##### **R.I.08. Información de los tags**
-Como cliente
+    Como cliente
 
-quiero conocer el nombre de cada tag y las películas que tiene asociadas
+    quiero registrar una película como vista asignando puntuación y un comentario opcional
 
-para descubrir películas parecidas.
+    para guardar mi experiencia con esa película en mi historial personal.
 
-##### **R.I.09. Información de los likes**
-Como cliente
+**- Pruebas de aceptación**
 
-quiero que se guarde qué cliente ha dado like, a qué log o a qué película, y la fecha del like
+1- Comprobar que un cliente puede guardar un log eligiendo fecha, valoración en estrellas y un texto de comentario.
 
-para saber qué contenido gusta más.
+2- Verificar que la valoración en estrellas se mantiene en la escala de 0,5 a 5 con incrementos de 0,5.
 
-##### **R.I.10. Información de las películas favoritas**
-Como cliente
+3- Verificar que se marca automáticamente como rewatch si la película ya había sido registrada anteriormente por el mismo cliente.
 
-quiero que se guarden mis películas favoritas y su posición (de 1 a 4) en mi perfil
+R.F.3.02. Consultar valoraciones (Read)
 
-para mostrarlas en el orden que yo elija.
+    Como cliente o administrador
 
-##### **R.I.11. Información de los seguidores**
-Como cliente
+    quiero leer las valoraciones y reseñas asociadas a una película o usuario
 
-quiero que se guarde a qué clientes sigo, quién me sigue y desde qué fecha
+    para conocer la opinión de otros clientes de la comunidad.
 
-para ver la actividad de los clientes que me interesan.
+**- Pruebas de aceptación**
 
-#### 4.1.2. Reglas de negocio
+1- Comprobar que se muestra el listado de logs y reseñas publicadas en la ficha de cada película.
 
-##### **R.N.01. Rango de valoración**
-Como cliente
+2- Verificar que la fecha y hora mostradas corresponden al momento exacto en el que se guardó la publicación.
 
-quiero que la valoración de una película esté entre 0,5 y 5 estrellas, en pasos de 0,5
+R.F.3.03. Actualizar valoración (Update)
 
-para que todas las notas sigan la misma escala.
+    Como cliente
 
-##### **R.N.02. Datos únicos de los usuarios**
-Como administrador
+    quiero modificar el texto o la puntuación de un log guardado previamente
 
-quiero que no haya dos usuarios con el mismo nombre de usuario o el mismo correo electrónico
+    para corregir erratas o cambiar mi valoración tras volver a ver la película.
 
-para poder identificar a cada usuario sin confusión.
+**- Pruebas de aceptación**
 
-##### **R.N.03. Máximo de películas favoritas**
-Como cliente
+1- Comprobar que el autor de una valoración puede cambiar las estrellas asignadas o editar el cuerpo de su reseña.
 
-quiero que mi perfil tenga como máximo 4 películas favoritas, sin repetir ninguna
+2- Verificar que las modificaciones cumplen las restricciones de rango de puntuación exigidas por el sistema.
 
-para que mi perfil sea claro y fácil de ver.
+R.F.3.04. Eliminar valoración o comentario (Delete)
 
-##### **R.N.04. Log solo de películas estrenadas**
-Como cliente
+    Como cliente o administrador
 
-quiero que no se pueda registrar un log de una película que todavía no se ha estrenado
+    quiero eliminar un log completo o moderar un comentario inapropiado
 
-para que los registros sean reales.
+    para borrar registros no deseados o mantener la convivencia pacífica en la plataforma.
 
-##### **R.N.05. Fecha del log no futura**
-Como administrador
+**- Pruebas de aceptación**
 
-quiero que la fecha y hora de un log no sea posterior al momento actual
+1- Comprobar que un cliente puede eliminar sus propios logs completos.
 
-para que los registros sean correctos.
+2- Comprobar que un administrador puede borrar únicamente el texto de un comentario inapropiado preservando el resto del log (fecha y nota).
 
-##### **R.N.06. Películas no repetidas en una lista**
-Como cliente
+3- Verificar que un cliente no puede eliminar los comentarios de otros usuarios.
 
-quiero que una película no pueda aparecer dos veces en la misma lista o en la watchlist
+---
 
-para tener mis listas ordenadas.
+#### 4.1.4. Módulo R.G.04: Gestión de listas personalizadas
 
-##### **R.N.07. Likes válidos**
-Como cliente
+R.F.4.01. Crear lista personalizada (Create)
 
-quiero que no se pueda dar like a un log propio, y que cada cliente solo pueda dar un like por log y un like por película
+    Como cliente
 
-para que los likes reflejen la opinión real de los clientes.
+    quiero crear una lista temática con nombre, descripción y nivel de privacidad
 
-##### **R.N.08. Privacidad de listas y perfiles**
-Como cliente
+    para empezar a agrupar películas según mi criterio.
 
-quiero que mis listas privadas y mi perfil privado solo los pueda ver yo
+**- Pruebas de aceptación**
 
-para proteger mi información.
+1- Comprobar que un cliente puede definir una nueva lista especificando título y visibilidad.
 
-##### **R.N.09. Duración de la película**
-Como administrador
+2- Verificar que la lista recién creada se añade correctamente a la sección de listas del perfil.
 
-quiero que la duración de una película sea mayor que 0 minutos
+R.F.4.02. Consultar lista personalizada (Read)
 
-para que la información de las películas sea correcta.
+    Como cliente o administrador
 
-##### **R.N.10. Rewatch**
-Como cliente
+    quiero consultar el contenido y la selección de películas de una lista
 
-quiero que, si registro un log de una película que ya tenía registrada, el nuevo log se marque como rewatch
+    para descubrir agrupaciones de películas hechas por mí o por otros usuarios.
 
-para saber cuántas veces he visto cada película.
+**- Pruebas de aceptación**
 
-##### **R.N.11. No seguirse a sí mismo**
-Como cliente
+1- Comprobar que se pueden visualizar todas las películas asociadas a una lista pública.
 
-quiero que un cliente no pueda seguirse a sí mismo ni seguir dos veces al mismo cliente
+2- Verificar que una lista privada solo es accesible para el usuario que la creó.
 
-para que la lista de seguidores sea correcta.
+R.F.4.03. Actualizar lista personalizada (Update)
 
-##### **R.N.12. Solo administradores eliminan comentarios ajenos**
-Como administrador
+    Como cliente
 
-quiero que solo los administradores puedan eliminar comentarios de otros clientes
+    quiero añadir, quitar o reordenar películas dentro de una lista propia, o modificar su nombre
 
-para mantener un buen ambiente en la plataforma.
+    para mantener mis listas temáticas organizadas.
+
+**- Pruebas de aceptación**
+
+1- Comprobar que el dueño de la lista puede añadir nuevos títulos o borrar los existentes.
+
+2- Verificar que el sistema bloquea los intentos de añadir dos veces la misma película dentro de una misma lista.
+
+R.F.4.04. Eliminar lista personalizada (Delete)
+
+    Como cliente
+
+    quiero borrar una lista que he creado previamente
+
+    para deshacerme de agrupaciones de películas que ya no me interesan.
+
+**- Pruebas de aceptación**
+
+1- Comprobar que el usuario puede pulsar sobre la opción de borrar lista y confirmar su eliminación.
+
+2- Verificar que la lista desaparece del perfil del cliente y deja de estar disponible para consulta.
+
+---
+
+#### 4.1.5. Módulo R.G.05: Gestión de películas por ver (Watchlist)
+
+R.F.5.01. Añadir a la lista de pendientes (Create)
+
+    Como cliente
+
+    quiero incluir una película dentro de mi lista de pendientes por ver
+
+    para recordar que tengo interés en verla más adelante.
+
+**- Pruebas de aceptación**
+
+1- Comprobar que se puede pulsar el botón de añadir a watchlist en cualquier ficha de película.
+
+2- Verificar que se permite guardar películas pendientes que aún no hayan sido estrenadas.
+
+R.F.5.02. Consultar la lista de pendientes (Read)
+
+    Como cliente
+
+    quiero revisar el listado completo de mis películas guardadas en la watchlist
+
+    para seleccionar qué película ver en mi tiempo libre.
+
+**- Pruebas de aceptación**
+
+1- Comprobar que el cliente puede entrar a su sección de watchlist y ver todas las películas guardadas junto a la fecha en que se añadieron.
+
+2- Verificar que la watchlist es una sección propia y privada asociada a la cuenta del usuario.
+
+R.F.5.03. Actualizar la lista de pendientes (Update)
+
+    Como cliente
+
+    quiero modificar notas o el orden de prioridad de las películas registradas en mi watchlist
+
+    para destacar las películas que quiero ver primero.
+
+**- Pruebas de aceptación**
+
+1- Comprobar que el cliente puede reordenar las entradas guardadas en la watchlist.
+
+2- Verificar que el sistema impide agregar duplicados de una misma película en la watchlist.
+
+R.F.5.04. Quitar de la lista de pendientes (Delete)
+
+    Como cliente
+
+    quiero eliminar un título de mi lista de pendientes
+
+    para retirar películas que ya he visto o en las que he perdido el interés.
+
+**- Pruebas de aceptación**
+
+1- Comprobar que el cliente puede retirar cualquier entrada guardada en su watchlist.
+
+2- Verificar que la película se elimina de la lista de pendientes de forma inmediata.
+
+---
+
+#### 4.1.6. Módulo R.G.06: Gestión de profesionales y su asignación a películas
+
+R.F.6.01. Crear profesional y asignación (Create)
+
+    Como administrador
+
+    quiero dar de alta un profesional y asignarlo con un rol específico a una película
+
+    para construir el reparto e historia técnica de las obras.
+
+**- Pruebas de aceptación**
+
+1- Comprobar que un administrador puede registrar un profesional con su nombre, nacionalidad y fecha de nacimiento.
+
+2- Comprobar que se puede asociar dicho profesional a una película indicando su papel (ej. actor, director, guionista).
+
+R.F.6.02. Consultar profesional y asignaciones (Read)
+
+    Como cliente o administrador
+
+    quiero consultar los datos de un profesional y ver la lista de películas en las que ha participado
+
+    para explorar la trayectoria y filmografía de un actor o director.
+
+**- Pruebas de aceptación**
+
+1- Comprobar que al consultar la ficha de un profesional se listan sus películas agrupadas por su papel en cada una.
+
+2- Verificar que al consultar la película se listan todos los profesionales asignados al reparto.
+
+R.F.6.03. Actualizar profesional o asignación (Update)
+
+    Como administrador
+
+    quiero modificar la ficha de un profesional o ajustar el rol que desempeñó en una película
+
+    para corregir datos biográficos o ajustar detalles de las asignaciones.
+
+**- Pruebas de aceptación**
+
+1- Comprobar que un administrador puede modificar los datos personales de un profesional o el nombre de su personaje/rol en una película.
+
+2- Verificar que los cambios actualizados se reflejan de forma coherente en las fichas de las películas asociadas.
+
+R.F.6.04. Eliminar profesional o asignación (Delete)
+
+    Como administrador
+
+    quiero desvincular un profesional de una película o darlo de baja del sistema
+
+    para corregir errores en los créditos de una obra o eliminar duplicados.
+
+**- Pruebas de aceptación**
+
+1- Comprobar que se puede eliminar la asignación entre un profesional y una película específica sin borrar los datos del profesional.
+
+2- Comprobar que un administrador puede eliminar un registro de profesional del sistema completo.
+
+---
+
+#### 4.1.7. Requisitos de información
+
+R.I.01. Información de los usuarios
+
+    Como administrador
+
+    quiero guardar el nombre de usuario, correo electrónico, contraseña cifrada y la privacidad del perfil (público o privado) de cada cuenta
+
+    para poder identificarlos, gestionar sus cuentas y controlar el acceso a la plataforma.
+
+R.I.02. Información de las películas
+
+    Como cliente
+
+    quiero conocer el título, fecha de estreno, duración en minutos, sinopsis y los tags asociados a cada película
+
+    para tener la información suficiente antes de decidir verla.
+
+R.I.03. Información de las valoraciones (Logs)
+
+    Como cliente
+
+    quiero que el sistema guarde el cliente que hizo el registro, la película vista, la fecha y hora exacta, la valoración en estrellas, el comentario opcional y el indicador de rewatch
+
+    para conservar un historial detallado de mi actividad cinéfila.
+
+R.I.04. Información de las listas personalizadas
+
+    Como cliente
+
+    quiero guardar el título, la descripción opcional, la privacidad (pública o privada) y el conjunto de películas pertenecientes a cada lista
+
+    para mantener organizadas mis selecciones temáticas.
+
+R.I.05. Información de las películas por ver (Watchlist)
+
+    Como cliente
+
+    quiero que se guarde la vinculación entre mi usuario y las películas que tengo pendientes, junto con la fecha en la que las añadí
+
+    para recordar exactamente qué títulos quiero ver en el futuro.
+
+R.I.06. Información de los profesionales
+
+    Como cliente
+
+    quiero conocer el nombre completo, nacionalidad y fecha de nacimiento de los profesionales cinematográficos
+
+    para consultar la biografía y antecedentes de los cineastas.
+
+R.I.07. Información de las asignaciones de profesionales a películas
+
+    Como cliente
+
+    quiero que se guarde qué profesional ha participado en cada película y el papel específico que desempeñó (ej. director, actor principal, guionista)
+
+    para conocer el reparto y equipo técnico detrás de cada obra.
+
+R.I.08. Información de las interacciones sociales (Likes y Seguidores)
+
+    Como cliente
+
+    quiero que se registre qué usuario da like a qué log o película, así como la relación de seguimiento entre clientes y su fecha de inicio
+
+    para conectar con otros usuarios y seguir la actividad de la comunidad.
+
+---
+
+#### 4.1.8. Reglas de negocio
+
+R.N.01. Unicidad de credenciales de usuario
+
+    Como administrador
+
+    quiero que el nombre de usuario y el correo electrónico sean únicos en todo el sistema
+
+    para evitar duplicidades e identificar inequívocamente a cada usuario.
+
+R.N.02. Validez y dominio numérico de la puntuación
+
+    Como cliente
+
+    quiero que la valoración numérica de un log pertenezca al rango de 0,5 a 5,0 en incrementos discretos de 0,5 estrellas
+
+    para garantizar la homogeneidad de las calificaciones almacenadas.
+
+R.N.03. Restricción temporal de registros de visualización
+
+    Como administrador
+
+    quiero que la fecha y hora asociadas a un log no sean posteriores a la fecha del momento actual ni anteriores a la fecha de estreno oficial de la película
+
+    para garantizar la veracidad cronológica de las visualizaciones.
+
+R.N.04. Detección y marcado automático de rewatch
+
+    Como cliente
+
+    quiero que un log sea marcado automáticamente como rewatch si existe un log previo registrado por el mismo cliente para la misma película
+
+    para mantener estadísticas consistentes sobre revisiones de películas.
+
+R.N.05. Cardinalidad máxima de películas favoritas
+
+    Como cliente
+
+    quiero que un perfil de usuario contenga como máximo 4 películas favoritas distintas
+
+    para asegurar la relevancia estética y concisión en el perfil público.
+
+R.N.06. Ausencia de duplicados en colecciones de películas
+
+    Como cliente
+
+    quiero que una misma película no pueda vincularse más de una vez a la misma lista personalizada ni aparecer duplicada en la watchlist del mismo usuario
+
+    para garantizar la integridad de las agrupaciones de películas.
+
+R.N.07. Restricciones de autoría en reacciones (Likes)
+
+    Como cliente
+
+    quiero que un cliente no pueda dar like a sus propios logs y que exista como máximo un único like por cliente sobre cada log o película
+
+    para evitar la automanipulación de la popularidad del contenido.
+
+R.N.08. Restricciones en relaciones de seguimiento (Follow)
+
+    Como cliente
+
+    quiero que un cliente no pueda seguirse a sí mismo y que no exista más de una relación activa de seguimiento en la misma dirección entre dos clientes
+
+    para asegurar la validez del grafo social.
+
+R.N.09. Política de visibilidad y acceso a datos privados
+
+    Como cliente
+
+    quiero que las listas personalizadas marcadas como privadas y la información de los perfiles privados solo sean accesibles por su usuario propietario
+
+    para garantizar el control de privacidad de la información.
+
+R.N.10. Restricción de integridad en datos de películas
+
+    Como administrador
+
+    quiero que la duración de cualquier película registrada sea estrictamente mayor a 0 minutos
+
+    para evitar inconsistencias en las fichas del catálogo cinematográfico.
+
+R.N.11. Autoridad exclusiva de moderación de comentarios
+
+    Como administrador
+
+    quiero que solo los usuarios con rol de Administrador tengan permisos para eliminar comentarios publicados por otros usuarios
+
+    para preservar la jerarquía de moderación del sistema.
+
+---
 
 ### 4.2. Mapa de historias de usuario (opcional)
 
 ### 4.3. Requisitos no funcionales (opcional)
-
-**R.N.F.01. Seguridad de las contraseñas**
-Como cliente
-
-quiero que mi contraseña se guarde cifrada
-
-para que nadie pueda leerla aunque acceda a la base de datos.
 
 -- fin entregable 1 --
 
