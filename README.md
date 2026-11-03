@@ -526,91 +526,47 @@ R.I.08. Información de las interacciones sociales (Likes y Seguidores)
 
 R.N.01. Unicidad de credenciales de usuario
 
-    Como administrador
-
-    quiero que el nombre de usuario y el correo electrónico sean únicos en todo el sistema
-
-    para evitar duplicidades e identificar inequívocamente a cada usuario.
+    El nombre de usuario y el correo electrónico deben ser únicos en todo el sistema. No se permite la creación ni actualización de cuentas que dupliquen estos datos.
 
 R.N.02. Validez y dominio numérico de la puntuación
 
-    Como cliente
-
-    quiero que la valoración numérica de un log pertenezca al rango de 0,5 a 5,0 en incrementos discretos de 0,5 estrellas
-
-    para garantizar la homogeneidad de las calificaciones almacenadas.
+    La valoración numérica asignada a una película dentro de un log debe pertenecer al rango cerrado entre 0,5 y 5,0 estrellas, permitiendo únicamente incrementos discretos de 0,5 en 0,5.
 
 R.N.03. Restricción temporal de registros de visualización
 
-    Como administrador
-
-    quiero que la fecha y hora asociadas a un log no sean posteriores a la fecha del momento actual ni anteriores a la fecha de estreno oficial de la película
-
-    para garantizar la veracidad cronológica de las visualizaciones.
+    La fecha y hora de un log de visualización no pueden ser posteriores al momento actual del servidor ni anteriores a la fecha oficial de estreno de la película correspondiente.
 
 R.N.04. Detección y marcado automático de rewatch
 
-    Como cliente
+    Un log se marcará de forma automática como *rewatch* si en la base de datos ya existe al menos un log anterior registrado por el mismo cliente para esa misma película.
 
-    quiero que un log sea marcado automáticamente como rewatch si existe un log previo registrado por el mismo cliente para la misma película
+R.N.05. Máximo de películas favoritas
 
-    para mantener estadísticas consistentes sobre revisiones de películas.
-
-R.N.05. Cardinalidad máxima de películas favoritas
-
-    Como cliente
-
-    quiero que un perfil de usuario contenga como máximo 4 películas favoritas distintas
-
-    para asegurar la relevancia estética y concisión en el perfil público.
+    Cada perfil de usuario puede tener asociadas como máximo 4 películas favoritas distintas. El sistema impedirá vincular una quinta película sin retirar previamente una existente.
 
 R.N.06. Ausencia de duplicados en colecciones de películas
 
-    Como cliente
-
-    quiero que una misma película no pueda vincularse más de una vez a la misma lista personalizada ni aparecer duplicada en la watchlist del mismo usuario
-
-    para garantizar la integridad de las agrupaciones de películas.
+    Una película no puede ser añadida más de una vez a la misma lista personalizada ni figurar duplicada en la watchlist de un mismo usuario.
 
 R.N.07. Restricciones de autoría en reacciones (Likes)
 
-    Como cliente
-
-    quiero que un cliente no pueda dar like a sus propios logs y que exista como máximo un único like por cliente sobre cada log o película
-
-    para evitar la automanipulación de la popularidad del contenido.
+    Un cliente no puede registrar un *like* en sus propios logs. Asimismo, sólo se permite un único *like* por cliente sobre cada log o película.
 
 R.N.08. Restricciones en relaciones de seguimiento (Follow)
 
-    Como cliente
-
-    quiero que un cliente no pueda seguirse a sí mismo y que no exista más de una relación activa de seguimiento en la misma dirección entre dos clientes
-
-    para asegurar la validez del grafo social.
+    Un cliente no puede seguirse a sí mismo ni registrar múltiples relaciones de seguimiento activas hacia un mismo usuario objetivo.
 
 R.N.09. Política de visibilidad y acceso a datos privados
 
-    Como cliente
-
-    quiero que las listas personalizadas marcadas como privadas y la información que contienen solo sean accesibles por su usuario propietario
-
-    para garantizar el control de privacidad de la información.
+    El contenido de las listas marcadas como privadas y la actividad de los perfiles privados sólo será visible para el propio usuario propietario de los mismos.
 
 R.N.10. Restricción de integridad en datos de películas
 
-    Como administrador
-
-    quiero que la duración de cualquier película registrada sea estrictamente mayor a 0 minutos
-
-    para evitar inconsistencias en las fichas del catálogo cinematográfico.
+    Toda película registrada en la plataforma debe tener una duración estrictamente mayor que 0 minutos.
 
 R.N.11. Autoridad exclusiva de moderación de comentarios
 
-    Como administrador
-
-    quiero que solo los usuarios con rol de Administrador tengan permisos para eliminar comentarios publicados por otros usuarios
-
-    para preservar la jerarquía de moderación del sistema.
+    La acción de eliminar comentarios o textos pertenecientes a otros usuarios está restringida únicamente a las cuentas que posean el rol de Administrador.
 
 ---
 
