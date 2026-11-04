@@ -697,6 +697,8 @@ Escenario de prueba 3
 | RN-9     |            |               |            |                         |              |                  |                  |
 | RN-10    | X          |               |            |                         |              |                  |                  |
 | RN-11    |            |               |            |                         | X            |                  | X                |
+
+
 -- fin entregable 2 --
 
 ## 7. Modelo relacional en 3FN
