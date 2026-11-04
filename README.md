@@ -583,17 +583,22 @@ R.N.11. Autoridad exclusiva de moderación de comentarios
 
 ![Diagrama UML](diagramas/diagrama_uml.svg)
 
-<!-- ![Modelo conceptual de FilmUS](modelo_conceptual.svg) -->
 
 
 
 
 ### 5.2. Escenarios de prueba
 
-- con descripción textual y diagrama de objetos UML.
 
+Escenario de prueba 1
 ![Escenario de prueba 1](diagramas/escenario_prueba1.svg)
+
+
+Escenario de prueba 2
 ![Escenario de prueba 2](diagramas/escenario_prueba2.svg)
+
+
+Escenario de prueba 3
 ![Escenario de prueba 3](diagramas/escenario_prueba3.svg)
 
 ## 6. Matrices de trazabilidad
