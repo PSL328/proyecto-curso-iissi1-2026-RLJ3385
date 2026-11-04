@@ -581,7 +581,7 @@ R.N.11. Autoridad exclusiva de moderación de comentarios
 ### 5.1. Diagramas de clases UML
 
 
-![Diagrama UML](diagramas\diagrama_uml.svg)
+![Diagrama UML](diagramas/diagrama_uml.svg)
 
 <!-- ![Modelo conceptual de FilmUS](modelo_conceptual.svg) -->
 
@@ -592,9 +592,9 @@ R.N.11. Autoridad exclusiva de moderación de comentarios
 
 - con descripción textual y diagrama de objetos UML.
 
-![Escenario de prueba 1](diagramas\escenario_prueba1.svg)
-![Escenario de prueba 2](diagramas\escenario_prueba2.svg)
-![Escenario de prueba 3](diagramas\escenario_prueba3.svg)
+![Escenario de prueba 1](diagramas/escenario_prueba1.svg)
+![Escenario de prueba 2](diagramas/escenario_prueba2.svg)
+![Escenario de prueba 3](diagramas/escenario_prueba3.svg)
 
 ## 6. Matrices de trazabilidad
 
